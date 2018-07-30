@@ -2,31 +2,36 @@
 #include <stdio.h>
 #include "stack.h"
 #include "bitwise.h"
+#include "base64.h"
+#include "base64_decoder.h"
+#include <string.h>
+#include <stdlib.h>
+
 void test_stack() {
-  printf("Testing bitwise...\n");
-  push(1);
-  push(2);
-  push(3);
-  assert(isEmpty() == 0);
-  assert(peek() == 3);
-  assert(pop() == 3);
-  assert(pop() == 2);
-  assert(pop() == 1);
-  assert(isEmpty() == 1);
-  printf("stack : all test cases passed\n");
+	printf("Testing bitwise...\n");
+	push(1);
+	push(2);
+	push(3);
+	assert(isEmpty() == 0);
+	assert(peek() == 3);
+	assert(pop() == 3);
+	assert(pop() == 2);
+	assert(pop() == 1);
+	assert(isEmpty() == 1);
+	printf("stack : all test cases passed\n");
 }
 
 void test_linkedlist() {
-  printf("Testing bitwise...\n");
-  insertFirst(1);
-  insertFirst(2);
-  insertFirst(3);
-  assert(is_empty() == 0);
-  assert(deleteFirst() == 3);
-  assert(deleteFirst() == 2);
-  assert(deleteFirst() == 1);
-  assert(is_empty() == 1);
-  printf("linkedlist : all test cases passed\n");
+	printf("Testing bitwise...\n");
+	insertFirst(1);
+	insertFirst(2);
+	insertFirst(3);
+	assert(is_empty() == 0);
+	assert(deleteFirst() == 3);
+	assert(deleteFirst() == 2);
+	assert(deleteFirst() == 1);
+	assert(is_empty() == 1);
+	printf("linkedlist : all test cases passed\n");
 }
 
 void test_bitwise() {
@@ -48,12 +53,30 @@ void test_bitwise() {
 	assert(isPower2(7) == 0);
 	assert(isPower2(-8) == 0);
 	printf("bitwise : all test cases passed...\n");
+
+}
+
+void test_base64_encoder(){
+	printf("Testing base 64 encoder..\n");
+	assert(strcmp("YWJjZA==",encode("abcd"))==0);
+	assert(strcmp("YWJjZGU=",encode("abcde"))==0);
+	assert(strcmp("YWJjZGVm",encode("abcdef"))==0);
+	printf("Base 64 encoder : all test cases passed...\n");
+}
+void test_base64_decoder(){
+	printf("Testing base 64 decoder..\n");
+	assert(strcmp(decode("YWJjZA=="),"abcd")==0);
+	assert(strcmp(decode("YWJjZGU="),"abcde")==0);
+	assert(strcmp(decode("YWJjZGVm"),"abcdef")==0);
+	printf("Base 64 decoder : all test cases passed...\n");
 }
 
 int main() {
-  test_linkedlist();
-  test_stack();
-  test_bitwise();
-  return 1;
+	test_linkedlist();
+	test_stack();
+	test_bitwise();
+	test_base64_encoder();
+	test_base64_decoder();
+	return 1;
 }
 
